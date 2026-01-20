@@ -9,7 +9,7 @@ export default async function handler(req, res) {
   const type   = req.query.type || "latest";
 
   // 🔒 whitelist lokasi (WAJIB)
-  const allowedLokasi = ["EWSPalaran", "EWSSangaSanga"];
+  const allowedLokasi = ["EWSPalaran", "EWSSambutan"];
   if (!allowedLokasi.includes(lokasi)) {
     return res.status(400).json({ error: "Lokasi tidak valid" });
   }
