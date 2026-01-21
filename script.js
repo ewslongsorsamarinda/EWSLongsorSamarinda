@@ -44,7 +44,6 @@ async function getData() {
             return;
         }
 
-
         document.getElementById("kelembapan").textContent = data.kelembapan;
         document.getElementById("getaran").textContent = data.getaran;
         document.getElementById("kemiringan").textContent = data.kemiringan;
@@ -71,7 +70,7 @@ async function getData() {
             ? "Sedang"
             : "Tinggi";
 
-        lastUpdate.textContent = hitungWaktuLalu(data.waktu);
+        document.getElementById("lastupdate").textContent = hitungWaktuLalu(data.waktu);
 
         updateRiskIndicator(data.potensi);
     } catch (err) {

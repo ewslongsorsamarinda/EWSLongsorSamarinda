@@ -106,10 +106,6 @@ function updateChart(historyData, tipe) {
 async function getDataHistory() {
   try {
     const res = await fetch(`/api/antares?type=all&lokasi=${lokasiAktif}`);
-    if (!res.ok) {
-      throw new Error("Response tidak OK");
-    }
-
     const historyData = await res.json();
 
     if (!Array.isArray(historyData) || historyData.length === 0) {
@@ -151,6 +147,8 @@ async function getDataHistory() {
       destroy: true,
       pageLength: 10,
       lengthMenu: [5, 10, 25, 50, 100],
+      scrollX: true,
+      autoWidth: false,
       order: [[0, "desc"]],
       columnDefs: [
         {
@@ -177,7 +175,7 @@ async function getDataHistory() {
       },
     });
 
-    const chartData = historyData.slice(0, 50);
+    const chartData = historyData.slice(0, 30);
     lastHistoryData = chartData;
     document.querySelector('[data-chart="kemiringan"]').classList.add("active");
     updateChart(chartData, "kemiringan");
