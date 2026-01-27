@@ -46,7 +46,7 @@ document.querySelectorAll(".chart-btn").forEach((btn) => {
 });
 
 function updateChart(historyData, tipe) {
-  const labels = historyData.map((item) => antaresToLocalDate(item.waktu));
+  const labels = historyData.map((item) => formatWaktuLokal(item.waktu));
 
   let datasetLabel = "";
   let datasetData = [];
@@ -115,7 +115,7 @@ async function getDataHistory() {
 
     // Urutkan data dari terbaru → terlama
     historyData.sort(
-      (a, b) => antaresToLocalDate(b.waktu) - antaresToLocalDate(a.waktu),
+      (a, b) => formatWaktuLokal(b.waktu) - formatWaktuLokal(a.waktu),
     );
 
     // Update teks "Diperbarui X detik lalu"
@@ -124,7 +124,7 @@ async function getDataHistory() {
     );
 
     const tableData = historyData.map((item) => {
-      const dateObj = antaresToLocalDate(item.waktu);
+      const dateObj = parseAntaresTime(item.waktu);
 
       return [
         {

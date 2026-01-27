@@ -1,18 +1,24 @@
-function antaresToLocalDate(ct) {
-    if (!ct) return null;
+// ===================================
+// Parsing waktu Antares (LOCAL TIME)
+// ===================================
+function parseAntaresTime(ct) {
+    if (!ct || ct.length < 15) return null;
 
-    // Antares ct → ISO UTC
-    const iso = ct.replace(
-        /(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})/,
-        "$1-$2-$3T$4:$5:$6Z"
-    );
+    const year = Number(ct.slice(0, 4));
+    const month = Number(ct.slice(4, 6)) - 1;
+    const day = Number(ct.slice(6, 8));
+    const hour = Number(ct.slice(9, 11));
+    const minute = Number(ct.slice(11, 13));
+    const second = Number(ct.slice(13, 15));
 
-    const d = new Date(iso);
-    return isNaN(d.getTime()) ? null : d;
+    return new Date(year, month, day, hour, minute, second);
 }
 
+// ===================================
+// Format untuk tampilan (UI)
+// ===================================
 function formatWaktuLokal(ct) {
-    const d = antaresToLocalDate(ct);
+    const d = parseAntaresTime(ct);
     if (!d) return "-";
 
     return d.toLocaleString("id-ID", {
@@ -25,14 +31,17 @@ function formatWaktuLokal(ct) {
     });
 }
 
+// ===================================
+// Hitung "X waktu lalu"
+// ===================================
 function hitungWaktuLalu(ct) {
-    const d = antaresToLocalDate(ct);
+    const d = parseAntaresTime(ct);
     if (!d) return "-";
 
-    const selisih = Math.floor((Date.now() - d.getTime()) / 1000);
+    const diff = Math.floor((Date.now() - d.getTime()) / 1000);
 
-    if (selisih < 60) return `Diperbarui ${selisih} detik lalu`;
-    if (selisih < 3600) return `Diperbarui ${Math.floor(selisih / 60)} menit lalu`;
-    if (selisih < 86400) return `Diperbarui ${Math.floor(selisih / 3600)} jam lalu`;
-    return `Diperbarui ${Math.floor(selisih / 86400)} hari lalu`;
+    if (diff < 60) return `Diperbarui ${diff} detik lalu`;
+    if (diff < 3600) return `Diperbarui ${Math.floor(diff / 60)} menit lalu`;
+    if (diff < 86400) return `Diperbarui ${Math.floor(diff / 3600)} jam lalu`;
+    return `Diperbarui ${Math.floor(diff / 86400)} hari lalu`;
 }
