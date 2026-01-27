@@ -262,8 +262,11 @@ body {
 }
 
 .risk-value #kemiringan,
+.risk-value #kemiringan-unit,
 .risk-value #getaran,
-.risk-value #kelembapan {
+.risk-value #getaran-unit,
+.risk-value #kelembapan,
+.risk-value #kelembapan-unit{
   font-size: 40px;
 }
 
