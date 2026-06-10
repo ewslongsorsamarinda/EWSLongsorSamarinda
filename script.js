@@ -110,3 +110,4 @@ function toggleRisk(level) {
 renderHeader();
 getData();
 setInterval(getData, 5000);
+
