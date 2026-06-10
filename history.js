@@ -203,3 +203,4 @@ renderHeader();
 
 // Auto reload tiap 1 Menit
 setInterval(getDataHistory, 60000);
+
