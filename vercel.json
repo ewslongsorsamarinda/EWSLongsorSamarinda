@@ -13,6 +13,6 @@
     }
   ],
   "env": {
-    "ANTARES_KEY": "@antares-key"
+    "ANTARES_KEY": "@ANTARES_KEY"
   }
 }
