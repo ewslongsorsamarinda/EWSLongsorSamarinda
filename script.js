@@ -1,6 +1,12 @@
 const LOCATIONS = {
-  EWSPalaran: "EWS Kecamatan Palaran",
-  EWSSambutan: "EWS Kecamatan Sambutan",
+  EWSPalaran: {
+    name: "EWS Kecamatan Palaran",
+    telegramBot: "https://t.me/EWSPalaranBot"
+  },
+  EWSSambutan: {
+    name: "EWS Kecamatan Sambutan",
+    telegramBot: "https://t.me/EWSSambutanBot"
+  }
 };
 
 const locationName = document.getElementById("locationName");
@@ -17,7 +23,15 @@ if (!LOCATIONS[currentLocation]) {
 
 // ====== RENDER ======
 function renderHeader() {
-  locationName.textContent = LOCATIONS[currentLocation];
+  locationName.textContent = LOCATIONS[currentLocation].name;
+  
+  // Update Telegram button link
+  const telegramBtn = document.querySelector(".telegram-btn");
+  if (telegramBtn) {
+    telegramBtn.onclick = () => {
+      window.open(LOCATIONS[currentLocation].telegramBot, "_blank");
+    };
+  }
 }
 
 // ====== SWITCH LOCATION ======
