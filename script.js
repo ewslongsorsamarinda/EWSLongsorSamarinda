@@ -3,9 +3,15 @@ const LOCATIONS = {
   EWSSambutan: "EWS Kecamatan Sambutan",
 };
 
+const TELEGRAM_BOTS = {
+  EWSPalaran: "https://t.me/EWSPalaranBot",
+  EWSSambutan: "https://t.me/EWSSambutanBot",
+};
+
 const locationName = document.getElementById("locationName");
 const swapBtn = document.getElementById("swapLocation");
 const lastUpdate = document.getElementById("lastupdate");
+const telegramBtn = document.getElementById("telegramBtn");
 
 // ====== INIT STATE ======
 let currentLocation = localStorage.getItem("ews_location");
@@ -18,6 +24,13 @@ if (!LOCATIONS[currentLocation]) {
 // ====== RENDER ======
 function renderHeader() {
   locationName.textContent = LOCATIONS[currentLocation];
+  updateTelegramLink();
+}
+
+// ====== UPDATE TELEGRAM LINK ======
+function updateTelegramLink() {
+  const botUrl = TELEGRAM_BOTS[currentLocation] || TELEGRAM_BOTS.EWSPalaran;
+  telegramBtn.onclick = () => window.open(botUrl, "_blank");
 }
 
 // ====== SWITCH LOCATION ======

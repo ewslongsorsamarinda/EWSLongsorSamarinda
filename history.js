@@ -14,7 +14,13 @@ const LOCATIONS = {
   EWSSambutan: "EWS Kecamatan Sambutan",
 };
 
+const TELEGRAM_BOTS = {
+  EWSPalaran: "https://t.me/EWSPalaranBot",
+  EWSSambutan: "https://t.me/EWSSambutanBot",
+};
+
 const locationName = document.getElementById("locationName");
+const telegramBtn = document.getElementById("telegramBtn");
 
 if (!LOCATIONS[lokasiAktif]) {
   lokasiAktif = "EWSPalaran";
@@ -24,6 +30,13 @@ if (!LOCATIONS[lokasiAktif]) {
 // ====== RENDER ======
 function renderHeader() {
   locationName.textContent = LOCATIONS[lokasiAktif];
+  updateTelegramLink();
+}
+
+// ====== UPDATE TELEGRAM LINK ======
+function updateTelegramLink() {
+  const botUrl = TELEGRAM_BOTS[lokasiAktif] || TELEGRAM_BOTS.EWSPalaran;
+  telegramBtn.onclick = () => window.open(botUrl, "_blank");
 }
 
 // Aktifkan tombol chart
