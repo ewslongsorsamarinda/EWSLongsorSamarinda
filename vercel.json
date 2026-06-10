@@ -11,8 +11,5 @@
       "src": "/api/(.*)",
       "dest": "/api/$1"
     }
-  ],
-  "env": {
-    "ANTARES_KEY": "@ANTARES_KEY"
-  }
+  ]
 }
